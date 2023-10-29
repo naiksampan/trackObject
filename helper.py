@@ -5,6 +5,9 @@ import cv2
 from pytube import YouTube
 
 import settings
+from streamlit_webrtc import webrtc_streamer
+
+
 
 
 def load_model(model_path):
@@ -161,8 +164,9 @@ def play_webcam(conf, model):
 
     Raises:
         None
+        settings.WEBCAM_PATH
     """
-    source_webcam = settings.WEBCAM_PATH
+    source_webcam = webrtc_streamer(key="sample")
     is_display_tracker, tracker = display_tracker_options()
     if st.sidebar.button('Detect Objects'):
         try:
