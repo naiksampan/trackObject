@@ -6,6 +6,8 @@ from pytube import YouTube
 
 import settings
 from streamlit_webrtc import webrtc_streamer
+from aiortc.contrib.media import MediaPlayer
+from aiortc.contrib.media import MediaRecorder
 
 
 
@@ -166,7 +168,13 @@ def play_webcam(conf, model):
         None
         source_webcam = settings.WEBCAM_PATH
     """
-    webrtc_streamer(key="sample")
+    webrtc_streamer(key="sample", 
+    video_processor_factory=None,
+    rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
+    media_stream_constraints={
+        "video": True,
+        "audio": False
+    })
     is_display_tracker, tracker = display_tracker_options()
     if st.sidebar.button('Detect Objects'):
         try:
