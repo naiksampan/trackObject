@@ -60,8 +60,10 @@ def _display_detected_frames(conf, model, st_frame, image, is_display_tracking=N
         # Predict the objects in the image using the YOLOv8 model
         res = model.predict(image, conf=conf)
 
-    # # Plot the detected objects on the video frame
+    # # Plot the detected objects on the video frame 
     res_plotted = res[0].plot()
+    webrtc_ctx.video_receiver.process_frame(res_plotted)
+    #st.image(frame, channels="BGR")
     st_frame.image(res_plotted,
                    caption='Detected Video',
                    channels="BGR",
