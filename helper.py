@@ -164,13 +164,13 @@ def play_webcam(conf, model):
 
     Raises:
         None
-        settings.WEBCAM_PATH
+        source_webcam = settings.WEBCAM_PATH
     """
-    source_webcam = webrtc_streamer(key="sample")
+    webrtc_streamer(key="sample")
     is_display_tracker, tracker = display_tracker_options()
     if st.sidebar.button('Detect Objects'):
         try:
-            vid_cap = cv2.VideoCapture(source_webcam)
+            vid_cap = cv2.VideoCapture("your_ip_camera_url")
             st_frame = st.empty()
             while (vid_cap.isOpened()):
                 success, image = vid_cap.read()
