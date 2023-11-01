@@ -166,7 +166,7 @@ def play_webcam(conf, model):
     Returns:
         None
 
-    Raises:
+    Raises:0,cv2.CAP_DSHOW
         None "your_ip_camera_url" ,cv2.CAP_FFMPEG
         source_webcam = settings.WEBCAM_PATH
     """
@@ -181,7 +181,7 @@ def play_webcam(conf, model):
     is_display_tracker, tracker = display_tracker_options()
     if st.sidebar.button('Detect Objects'):
         try:
-            vid_cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+            vid_cap = cv2.VideoCapture(source_webcam)
             st_frame = st.empty()
             while (vid_cap.isOpened()):
                 success, image = vid_cap.read()
