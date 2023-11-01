@@ -154,7 +154,13 @@ def play_rtsp_stream(conf, model):
             vid_cap.release()
             st.sidebar.error("Error loading RTSP stream: " + str(e))
 
+def video_frame_callback(frame):
+    img = frame.to_ndarray(format="bgr24")
 
+    flipped = img[::-1,:,:]
+
+    return av.VideoFrame.from_ndarray(flipped, format="bgr24")
+    
 def play_webcam(conf, model):
     """
     Plays a webcam stream. Detects Objects in real-time using the YOLOv8 object detection model.
@@ -172,6 +178,7 @@ def play_webcam(conf, model):
     """
     webrtc_streamer(key="sample", 
     video_processor_factory=None,
+    video_frame_callback=video_frame_callback,
     rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
     media_stream_constraints={
         "video": True,
