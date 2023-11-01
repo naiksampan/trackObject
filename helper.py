@@ -170,18 +170,18 @@ def play_webcam(conf, model):
         None "your_ip_camera_url" ,cv2.CAP_FFMPEG
         source_webcam = settings.WEBCAM_PATH
     """
-    # webrtc_streamer(key="sample", 
-    # video_processor_factory=None,
-    # rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
-    # media_stream_constraints={
-    #     "video": True,
-    #     "audio": False
-    # })
+    webrtc_streamer(key="sample", 
+    video_processor_factory=None,
+    rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
+    media_stream_constraints={
+        "video": True,
+        "audio": False
+    })
      # source_webcam = settings.WEBCAM_PATH
     is_display_tracker, tracker = display_tracker_options()
     if st.sidebar.button('Detect Objects'):
         try:
-            vid_cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+            vid_cap = cv2.VideoCapture("your_ip_camera_url" ,cv2.CAP_FFMPEG)
             st_frame = st.empty()
             while (vid_cap.isOpened()):
                 success, image = vid_cap.read()
